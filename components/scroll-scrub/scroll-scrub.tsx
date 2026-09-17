@@ -653,7 +653,7 @@ export function ScrollScrub({
       <div className="scroll-scrub__story">
         {segments.map((segment) => {
           const bandStyle: CSSProperties = {
-            minHeight: `${Math.max(segment.weight, 0.2) * 100}dvh`,
+            minHeight: `${Math.max(segment.weight, 0.2) * 100}svh`,
           };
 
           if (segment.kind === "connector") {

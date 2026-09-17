@@ -16,8 +16,18 @@
   --pb-gutter: clamp(1.25rem, 5vw, 5rem);
 }
 
+html,
+.pb-body {
+  /* Nothing may push the page wider than the phone: no sideways drift. */
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+}
+
 .pb-body {
   margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   background: var(--pb-cocoa-2);
   color: var(--pb-cocoa);
   font-family: var(--pb-sans);
@@ -1306,7 +1316,7 @@
 
 /* ---------- Admin ---------- */
 .pb-admin {
-  min-height: 100dvh;
+  min-height: 100svh;
   padding: 1.5rem var(--pb-gutter) 4rem;
   background: var(--pb-flour);
   color: var(--pb-cocoa);
@@ -1671,4 +1681,124 @@
   background: var(--pb-lavender);
   color: var(--pb-crust);
   font-size: 0.88rem;
+}
+
+
+/* ---------- Phone polish ---------- */
+.pb-body button,
+.pb-body a,
+.pb-body label {
+  touch-action: manipulation;
+}
+
+@media (max-width: 860px) {
+  /* The headline shade stays inside the screen edge. */
+  .pb-body .scroll-scrub__copy::before {
+    inset: -3rem -1.25rem;
+  }
+
+  /* Comfortable 44px finger targets. */
+  .pb-bento__add,
+  .pb-bento__browse {
+    min-height: 2.75rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .pb-underline,
+  .pb-directions,
+  .pb-visit__facts a,
+  .pb-footer__base a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .pb-header__brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .pb-pin-cta {
+    min-height: 2.75rem;
+  }
+
+  .pb-stepper button {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .pb-cart__lines li {
+    grid-template-columns: 1fr auto;
+    row-gap: 0.5rem;
+  }
+
+  .pb-cart__line {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .pb-stepper {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .pb-visit__facts div {
+    flex-wrap: wrap;
+  }
+
+  .pb-visit__facts dd {
+    overflow-wrap: anywhere;
+  }
+
+  /* Keep the floating order button from covering the footer. */
+  .pb-footer {
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+  }
+
+  .pb-header {
+    padding-top: max(0.7rem, env(safe-area-inset-top));
+  }
+}
+
+@media (max-width: 480px) {
+  /* Menu rows: name on top, price underneath, add button on the right. */
+  .pb-menu__item {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "text add"
+      "price add";
+    row-gap: 0.35rem;
+  }
+
+  .pb-menu__text {
+    grid-area: text;
+  }
+
+  .pb-menu__price {
+    grid-area: price;
+    justify-self: start;
+  }
+
+  .pb-add {
+    grid-area: add;
+    width: 2.9rem;
+    height: 2.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .pb-lockup__name {
+    font-size: 1.05rem;
+  }
+
+  .pb-lockup__pin {
+    width: 5rem;
+  }
+
+  .pb-pin-cta {
+    margin-right: 0.7rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.88rem;
+  }
 }
